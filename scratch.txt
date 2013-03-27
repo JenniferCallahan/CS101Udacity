@@ -1,0 +1,463 @@
+
+
+def blastoff(n):
+    if n<=0: 
+        return ['Blastoff!']
+    if n > 0:
+        return [n] + blastoff(n-1)
+    
+print blastoff(2)
+
+[2, 1, 'Blastoff!']
+
+def blastoff(n):
+    list = []
+    while n > 0:
+        list.append(n)
+        n = n - 1
+    list.append('blastoff')
+    return list
+
+print blastoff(3)
+
+
+def blastoff(n):
+    if n<=0: 
+        return 'Blastoff!'
+    else: 
+        result = str(n) + ',' + ' ' + str(blastoff(n-1))
+        return result 
+       
+    
+print blastoff(4)
+
+def is_list(p):
+    return isinstance(p, list)
+
+def find_innermost_list(list):
+    length = len(list)
+    result = ''
+    for item in list: 
+        if is_list(item):
+            result = find_innermost_list(item)
+        else: 
+            result = list
+    return result
+
+def list_reverse(list):
+    lista = []
+    listb = []
+    for item in list: 
+        lista.append(item)
+    while len(lista) > 0: 
+        listb.append(lista.pop())
+    return listb
+	
+def add_to_list(string):
+    list = []
+    length = len(string)
+    n = 0
+    while n < length: 
+        list.append(string[n])
+        n +=1
+    return list
+
+
+string = 'string'
+print add_to_list(string)
+
+def deep_reverse(list):
+    length = len(list)
+    n = 0
+    listb = []
+    listc = []
+    for item in list: 
+        listb.append(item)
+    while len(listb) > 1:
+        item = listb.pop() 
+        #if is_list(item):
+            #deep_reverse(item)
+       
+        listc.append(item)
+    return listc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def longest_repetition(list):
+    best_count = 0
+    best_counted = None
+    counter = 1
+    p = 0
+    comparison = ''
+    for item in list: 
+       
+        if item == comparison:
+            counter = counter + 1
+        else: 
+            if counter > best_count: 
+                best_count = counter
+                best_counted = list[p-1]
+            counter = 1
+        comparison = list[p-1] 
+        if p <len(list):
+            p = p + 1
+          
+    return best_counted
+
+
+
+def make_converter(match, replacement):
+   match = replacement
+   return replacement
+
+
+p = len(match)
+    while p > -1:
+        match = match[0:p]
+        p = p-1
+    return match
+
+
+
+
+
+
+
+
+def identify_match(string, match, replacement):
+    if match not in string:
+        return "No match"
+    else: 
+        while match in string: 
+            end_string = ''
+            for char in string: 
+                length = len(match)
+                if string[string.find(char):(string.find(char) + length)] == match:
+                    end_string = end_string + string[:string.find(char)-1]                  
+                string = string[string.find(char) + length:]
+
+            return end_string
+        
+    
+    
+print identify_match('cats are bad cats','cats','bugs')
+
+
+def identify_match(string, match, replacement):
+    if match not in string:
+        return "No match"
+    else: 
+        while match in string: 
+		#while loop is doing nothing here -- can be removed without changing output
+            end_string = ''
+            for char in string: 
+                if char == match[0]:
+                    length = len(match)
+                    start = string.find(char)
+                    stop = string.find(char) + length
+                    stringlet = string[string.find(char):string.find(char) + length]
+                    #print stringlet
+                    if stringlet == match: 
+                        stringlet = replacement
+                        end_string = end_string + stringlet
+                end_string = end_string+ char
+                string = string[string.find(char) + 1:]
+
+            return end_string
+        
+    
+    
+print identify_match('cats are bad cats','cats','bugs')
+OUTPUT IS bugscats are bad bugscats
+
+
+
+
+
+def identify_match(string, match, replacement):
+    if match not in string:
+        return "No match"
+    else: 
+        while match in string: 
+            end_string = ''
+            for char in string: 
+                if char == match[0]:
+                    length = len(match)
+                    start = string.find(char)
+                    stop = string.find(char) + length
+                    stringlet = string[string.find(char):string.find(char) + length]
+                    #print stringlet
+                    if stringlet == match: 
+                        stringlet = replacement
+                        end_string = end_string + stringlet
+                    string = string[string.find(char) + 1:]
+
+            return end_string
+        
+    
+    
+print identify_match('aaaaaabaaaaa','aba','b')
+GIVES BACCK CORRECT ANSWER B, but that's the only thing in end_string
+
+
+
+
+
+def identify_match(string, match, replacement):
+    end_string = ''
+    for char in string:
+        if char == match[0]:
+            length = len(match)
+            if string[string.find(char):string.find(char)+length] == match:
+      
+
+
+         string[string.find(char):string.find(char)+length] = replacement         
+        end_string = end_string + char
+    return end_string
+
+
+
+
+def identify_match(string, match, replacement):
+    end_string = ''
+    while match in string:
+        for char in string: 
+            if char == match[0]:
+                length = len(match)
+                char_no = string.find(char)
+                stringlet = string[string.find(char):string.find(char)+length]
+                if stringlet == match: 
+                    stringlet = replacement
+                    end_string = end_string + stringlet
+            end_string = end_string + char
+    return end_string
+
+
+
+
+
+def remove_tags(string):
+    list = []
+    p = 0
+    if '<' not in string: 
+        list.append(string)
+    else: 
+        for i in string: 
+            string = string[p:] 
+            start = string.find('>')+1
+            stop = string.find('<', start)
+            if stop == -1: 
+                break
+            content_bit = string[start:stop]
+            if len(content_bit)> 0:
+                list.append(content_bit)
+            p = stop + 1
+    final_list = []
+    for e in list: 
+        splits = e.split()
+        for w in splits: 
+            final_list.append(w)
+
+    return final_list
+	
+	THIS CODE ONLY WORKS FOR STRINGS THAT START WITH A LINK
+
+
+def remove_tags(string):
+    list = []
+    p = 0
+    if '<' not in string: 
+        list.append(string)
+    else: 
+        for i in string: 
+            string = string[p:] 
+            start = string.find('<')
+            stop = string.find('>', start)+1
+            if stop == -1: 
+                break
+            content_bit = string[start:stop]
+            if len(content_bit)> 0:
+                list.append(content_bit)
+            p = stop + 1
+    #final_list = []
+    #for e in list: 
+       # splits = e.split()
+        #for w in splits: 
+            #final_list.append(w)
+
+    return list
+	
+	THIS CODE GIVES BACK THE TAGS (rather than the untagged content), BUT THEN GETS STUCK IN A LOOP 
+	AT THE END OF THE STRING
+
+
+	
+	
+	
+	def remove_tags(string):
+    content = []
+    if '<' not in string: 
+        content.append(string)
+    content = content[0].split()
+
+    return content
+
+THIS SORTS TAGLESS TEXT PROPERLY into a list
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def triangle(n):
+    whole_triangle = [[1]]
+    no_of_rows = range(0,n+1)[1:]
+    place = 0
+    for item in no_of_rows: 
+        row_value = no_of_rows[place]
+        list = [1]
+        if row_value == 0:
+            return []
+        else:
+            cols = range(0,row_value)[1:]
+            prev_cell = 1
+            p = 0
+            for item in cols: 
+                col_specific = cols[p]
+                current_cell = prev_cell * (float(row_value - col_specific) / col_specific)
+                list.append(int(current_cell))
+                prev_cell = current_cell
+                p = p + 1
+        whole_triangle.append(list)
+        place = place + 1
+    return whole_triangle
+
+
+
+
+
+
+
+
+def triangle(n):
+    list = [1]
+    if n == 0:
+        return []
+    else:
+        cols = range(0,n)[1:]
+        prev_cell = 1
+        p = 0
+        for item in cols: 
+            col_specific = cols[p]
+            current_cell = prev_cell * (float(n - col_specific) / col_specific)
+            list.append(int(current_cell))
+            prev_cell = current_cell
+            p = p + 1
+    
+    return list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+list = [15,6,87,43,22,1,4,3]
+
+def quicksort(list):
+    higher = []
+    lower = []
+    if len(list) == 0: 
+        return list
+    if len(list) == 1: 
+        return list
+    else: 
+        pivot = list[0]
+        for e in list: 
+            if e > pivot: 
+                higher.append(e)
+            if e < pivot: 
+                lower.append(e)
+        return quicksort(lower)+ [pivot] + quicksort(higher)
+            
+        
+    #return higher + lower
+
+print quicksort(list)
+
+def sort_list(list):
+    list2 = []
+    if len(list) > 0:
+        comparison = list[0]
+        for e in list: 
+            if e < comparison:
+                comparison = e
+        list.pop(list.index(comparison))
+        list2 = [comparison] + sort_list(list)
+    else:
+        return list2
+	
+	
+	
+def sort_list(list):
+    list2 = []
+    comparison = 1
+    for e in list: 
+        if e < comparison: 
+            comparison = e        
+    list.pop(list.index(comparison))
+    list2.append(comparison)
+    return list2
